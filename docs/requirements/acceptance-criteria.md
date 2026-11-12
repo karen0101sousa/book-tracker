@@ -112,8 +112,124 @@ Como leitor, quero registrar minhas experiências de leitura para acompanhar os 
 - **Quando** o usuário consultar seu histórico;
 - **Então** o sistema deverá apresentar as experiências associadas ao livro, incluindo releituras.
 
-## 3. Observações para validação posterior
+## 3. Avaliações
 
-- O intervalo permitido para anos de conclusão ainda deverá ser formalizado.
-- Os critérios serão complementados com testes de valores-limite, validação de formatos e cenários de arquivamento.
-- Os critérios das avaliações, metas, lista de desejos e dashboard serão adicionados nas próximas versões.
+### CA17 — Criar avaliação
+
+- **Dado** que existe um livro cadastrado;
+- **Quando** o usuário informar uma nota válida e um comentário com pelo menos 150 caracteres;
+- **Então** o sistema deverá registrar a avaliação associada ao livro.
+
+### CA18 — Permitir livro sem avaliação
+
+- **Dado** que existe um livro cadastrado;
+- **Quando** o usuário consultar os dados do livro sem ter criado uma avaliação;
+- **Então** o sistema deverá apresentar o livro normalmente, sem exigir uma avaliação.
+
+### CA19 — Validar nota
+
+- **Dado** que o usuário está criando uma avaliação;
+- **Quando** informar uma nota inferior a 1 ou superior a 5;
+- **Então** o sistema deverá rejeitar a operação.
+
+### CA20 — Validar comentário
+
+- **Dado** que o usuário está criando uma avaliação;
+- **Quando** informar um comentário com menos de 150 caracteres;
+- **Então** o sistema deverá rejeitar a operação.
+
+### CA21 — Impedir avaliações duplicadas
+
+- **Dado** que um livro já possui uma avaliação;
+- **Quando** o usuário tentar criar outra avaliação para o mesmo livro;
+- **Então** o sistema deverá impedir a duplicação.
+
+### CA22 — Editar avaliação
+
+- **Dado** que um livro possui uma avaliação;
+- **Quando** o usuário modificar a nota ou o comentário, respeitando as regras de validação;
+- **Então** o sistema deverá atualizar a avaliação existente.
+
+## 4. Lista de desejos
+
+### CA23 — Adicionar livro à lista de desejos
+
+- **Dado** que o usuário deseja adquirir ou ler determinado livro;
+- **Quando** informar título e nome do autor;
+- **Então** o sistema deverá registrar o item na lista de desejos, independentemente de existir um cadastro na biblioteca.
+
+### CA24 — Consultar lista de desejos
+
+- **Dado** que existem itens registrados;
+- **Quando** o usuário acessar a lista de desejos;
+- **Então** o sistema deverá apresentar os itens cadastrados.
+
+### CA25 — Associar item da lista a um livro cadastrado
+
+- **Dado** que existe um item na lista de desejos e um livro correspondente na biblioteca;
+- **Quando** o usuário realizar a associação;
+- **Então** o sistema deverá vincular os registros.
+
+### CA26 — Editar item da lista de desejos
+
+- **Dado** que existe um item cadastrado;
+- **Quando** o usuário modificar suas informações;
+- **Então** o sistema deverá salvar as alterações.
+
+### CA27 — Remover item da lista de desejos
+
+- **Dado** que existe um item na lista de desejos;
+- **Quando** o usuário solicitar sua remoção;
+- **Então** o sistema deverá removê-lo da lista, sem excluir um eventual livro associado da biblioteca.
+
+## 5. Metas anuais
+
+### CA28 — Criar meta anual
+
+- **Dado** que não existe uma meta cadastrada para determinado ano;
+- **Quando** o usuário informar o ano e a quantidade desejada de leituras;
+- **Então** o sistema deverá registrar a meta.
+
+### CA29 — Impedir metas duplicadas no mesmo ano
+
+- **Dado** que já existe uma meta para determinado ano;
+- **Quando** o usuário tentar cadastrar outra meta para o mesmo ano;
+- **Então** o sistema deverá impedir a duplicação.
+
+### CA30 — Validar quantidade da meta
+
+- **Dado** que o usuário está criando uma meta;
+- **Quando** informar uma quantidade menor ou igual a zero;
+- **Então** o sistema deverá rejeitar a operação.
+
+### CA31 — Calcular progresso da meta
+
+- **Dado** que existe uma meta cadastrada para determinado ano;
+- **Quando** o usuário consultar seu progresso;
+- **Então** o sistema deverá apresentar a quantidade de experiências de leitura concluídas naquele ano, incluindo releituras.
+
+## 6. Dashboard
+
+### CA32 — Consultar indicadores de leitura
+
+- **Dado** que existem experiências de leitura registradas;
+- **Quando** o usuário acessar o dashboard;
+- **Então** o sistema deverá apresentar indicadores consolidados de sua atividade de leitura.
+
+### CA33 — Consultar estatísticas por ano
+
+- **Dado** que existem leituras concluídas em diferentes anos;
+- **Quando** o usuário consultar as estatísticas anuais;
+- **Então** o sistema deverá apresentar a quantidade de experiências concluídas em cada ano.
+
+### CA34 — Consultar distribuição por formato
+
+- **Dado** que existem leituras registradas em diferentes formatos;
+- **Quando** o usuário consultar as estatísticas por formato;
+- **Então** o sistema deverá apresentar a distribuição entre leituras físicas e digitais.
+
+### CA35 — Consultar dashboard sem registros
+
+- **Dado** que ainda não existem leituras registradas;
+- **Quando** o usuário acessar o dashboard;
+- **Então** o sistema deverá apresentar indicadores zerados ou uma mensagem apropriada, sem gerar erros.
